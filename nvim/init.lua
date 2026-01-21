@@ -109,12 +109,13 @@ require("lazy").setup({
 		{
 			"neovim/nvim-lspconfig",
 			config = function()
+				vim.lsp.config["luals"] = {}
+				vim.lsp.config["pyright"] = {}
+				vim.lsp.config["rust_analyzer"] = {}
+
 				vim.lsp.enable("luals")
 				vim.lsp.enable("pyright")
-				vim.lsp.enable("rust-analyzer")
-
-        vim.lsp.config("luals")
-        vim.lsp.config("rust-analyzer")
+				vim.lsp.enable("rust_analyzer")
 			end,
 		},
 		{
