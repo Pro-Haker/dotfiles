@@ -1,0 +1,9 @@
+/*
+!/.bashrc
+!/.gitignore
+!/nvim/
+!/tmux/
+/vesktop/*
+!/vesktop/
+!/vesktop/settings/
+!/vesktop/settings.json
