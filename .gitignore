@@ -5,5 +5,5 @@
 !/tmux/
 /vesktop/*
 !/vesktop/
-!/vesktop/settings/
+!/vesktop/settings/settings.json
 !/vesktop/settings.json
