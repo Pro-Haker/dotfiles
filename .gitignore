@@ -4,6 +4,5 @@
 !/nvim/
 !/tmux/
 /vesktop/*
-!/vesktop/
-!/vesktop/settings/settings.json
-!/vesktop/settings.json
+vesktop/settings.json
+vesktop/settings/settings.json
