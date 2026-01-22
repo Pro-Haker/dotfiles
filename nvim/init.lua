@@ -67,6 +67,93 @@ require("lazy").setup({
 			config = true,
 		},
 		{
+			"hrsh7th/nvim-cmp",
+			dependencies = {
+				"hrsh7th/cmp-nvim-lsp",
+				"L3MON4D3/LuaSnip",
+				"neovim/nvim-lspconfig",
+			},
+			config = function()
+				local cmp = require("cmp")
+				cmp.setup({
+					snippet = {
+						-- REQUIRED - you must specify a snippet engine
+						expand = function(args)
+							require("luasnip").lsp_expand(args.body)
+						end,
+					},
+					window = {
+						completion = cmp.config.window.bordered(),
+						documentation = cmp.config.window.bordered(),
+					},
+					mapping = cmp.mapping.preset.insert({
+						["<C-b>"] = cmp.mapping.scroll_docs(-4),
+						["<C-f>"] = cmp.mapping.scroll_docs(4),
+						["<C-Space>"] = cmp.mapping.complete(),
+						["<C-e>"] = cmp.mapping.abort(),
+						["<CR>"] = cmp.mapping.confirm({ select = true }),
+					}),
+					sources = cmp.config.sources({
+						{ name = "nvim_lsp" },
+						{ name = "luasnip" },
+					}, {
+						{ name = "buffer" },
+					}),
+				})
+
+				cmp.setup.cmdline(":", {
+					mapping = cmp.mapping.preset.cmdline(),
+					sources = cmp.config.sources({
+						{ name = "path" },
+					}, {
+						{ name = "cmdline" },
+					}),
+					matching = { disallow_symbol_nonprefix_matching = false },
+				})
+
+				local function lsp_config(lsp, settings)
+					local capabilities = require("cmp_nvim_lsp").default_capabilities()
+					vim.lsp.config(lsp, {
+						capabilities = capabilities,
+						settings = settings,
+					})
+					vim.lsp.enable(lsp)
+				end
+
+				lsp_config("lua_ls", {
+					Lua = {
+						diagnostics = {
+							globals = {
+								"vim",
+							},
+						},
+						telemetry = {
+							enable = false,
+						},
+					},
+				})
+				lsp_config("pyright", {})
+				lsp_config("rust_analyzer", {})
+
+				vim.api.nvim_create_autocmd("BufEnter", {
+					pattern = "*.rs",
+					callback = function()
+						local root = vim.fs.find("Cargo.toml", {
+							upward = true,
+							path = vim.api.nvim_buf_get_name(0),
+						})[1]
+
+						if not root then
+							vim.notify(
+								"Rust file opened outside a Cargo workspace\nrust-analyzer completion will not work",
+								vim.log.levels.WARN
+							)
+						end
+					end,
+				})
+			end,
+		},
+		{
 			"stevearc/conform.nvim",
 			config = function()
 				require("conform").setup({
@@ -106,18 +193,7 @@ require("lazy").setup({
 			"nvim-lualine/lualine.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 		},
-		{
-			"neovim/nvim-lspconfig",
-			config = function()
-				vim.lsp.config["luals"] = {}
-				vim.lsp.config["pyright"] = {}
-				vim.lsp.config["rust_analyzer"] = {}
-
-				vim.lsp.enable("luals")
-				vim.lsp.enable("pyright")
-				vim.lsp.enable("rust_analyzer")
-			end,
-		},
+		{ "neovim/nvim-lspconfig" },
 		{
 			"stevearc/oil.nvim",
 			config = function()
