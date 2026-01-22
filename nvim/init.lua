@@ -16,20 +16,22 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Opts
+vim.opt.expandtab = true
 vim.opt.nu = true
 vim.opt.rnu = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.opt.expandtab = true
-vim.opt.smarttab = true
-vim.opt.smartindent = true
 vim.opt.scrolloff = 8
+vim.opt.shiftwidth = 4
+vim.opt.signcolumn = "yes"
+vim.opt.smartindent = true
+vim.opt.smarttab = true
+vim.opt.softtabstop = 4
+vim.opt.tabstop = 4
 
 -- Keybinds
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>gs", "<CMD>Git<CR>")
 vim.keymap.set("n", "<leader>l", "<CMD>Lazy<CR>")
+vim.keymap.set("x", "<leader>s", ":'<,'>!sort<CR>", { silent = true })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
