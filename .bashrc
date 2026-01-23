@@ -12,7 +12,10 @@ alias grep='grep --color=auto'
 alias cls='clear'
 
 # Variables
+export EDITOR=nvim
 export LC_COLLATE=C
 export PROMPT_DIRTRIM=3
 
 PS1='\w \\$ '
+
+exec fish

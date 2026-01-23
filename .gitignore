@@ -1,6 +1,7 @@
 /*
 !/.bashrc
 !/.gitignore
+!/fish/
 !/nvim/
 !/tmux/
 /vesktop/*
