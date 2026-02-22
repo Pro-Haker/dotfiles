@@ -8,3 +8,4 @@
 /vesktop/*
 vesktop/settings.json
 vesktop/settings/settings.json
+!/git/
