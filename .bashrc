@@ -15,6 +15,7 @@ alias cls='clear'
 export EDITOR=nvim
 export LC_COLLATE=C
 export PROMPT_DIRTRIM=3
+export LC_ALL="en_DK.UTF-8"
 
 PS1='\w \\$ '
 
