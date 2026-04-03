@@ -309,11 +309,6 @@
             "logDeletes": true,
             "inlineEdits": true
         },
-        "MessageTags": {
-            "enabled": true,
-            "tagsList": {},
-            "clyde": true
-        },
         "MoreQuickReactions": {
             "enabled": true,
             "reactionCount": 5
@@ -688,6 +683,11 @@
         },
         "WebContextMenus": {
             "enabled": true
+        },
+        "CustomCommands": {
+            "enabled": true,
+            "tagsList": {},
+            "clyde": true
         }
     },
     "uiElements": {
@@ -704,6 +704,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1768918199205
+        "settingsSyncVersion": 1774366980314
     }
 }

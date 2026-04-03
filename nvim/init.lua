@@ -1,17 +1,17 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out,                            "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -37,8 +37,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Miscellaneous
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lua" },
-	command = "setlocal shiftwidth=2 tabstop=2",
+  pattern = { "lua" },
+  command = "setlocal shiftwidth=2 tabstop=2",
 })
 
 -- Use undotree instead of the default
@@ -52,211 +52,220 @@ vim.lsp.inlay_hint.enable()
 
 -- Briefly highlight yanked area
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", {}),
-	desc = "Hightlight selection on yank",
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 75 })
-	end,
+  group = vim.api.nvim_create_augroup("highlight_yank", {}),
+  desc = "Hightlight selection on yank",
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 75 })
+  end,
 })
 
 -- Setup lazy.nvim
 require("lazy").setup({
-	spec = {
-		{
-			"windwp/nvim-autopairs",
-			event = "InsertEnter",
-			config = true,
-		},
-		{
-			"hrsh7th/nvim-cmp",
-			dependencies = {
-				"hrsh7th/cmp-nvim-lsp",
-				"L3MON4D3/LuaSnip",
-				"neovim/nvim-lspconfig",
-			},
-			config = function()
-				local cmp = require("cmp")
-				cmp.setup({
-					snippet = {
-						-- REQUIRED - you must specify a snippet engine
-						expand = function(args)
-							require("luasnip").lsp_expand(args.body)
-						end,
-					},
-					window = {
-						completion = cmp.config.window.bordered(),
-						documentation = cmp.config.window.bordered(),
-					},
-					mapping = cmp.mapping.preset.insert({
-						["<C-b>"] = cmp.mapping.scroll_docs(-4),
-						["<C-f>"] = cmp.mapping.scroll_docs(4),
-						["<C-Space>"] = cmp.mapping.complete(),
-						["<C-e>"] = cmp.mapping.abort(),
-						["<CR>"] = cmp.mapping.confirm({ select = true }),
-					}),
-					sources = cmp.config.sources({
-						{ name = "nvim_lsp" },
-						{ name = "luasnip" },
-					}, {
-						{ name = "buffer" },
-					}),
-				})
+  spec = {
+    {
+      "windwp/nvim-autopairs",
+      event = "InsertEnter",
+      config = true,
+    },
+    {
+      "hrsh7th/nvim-cmp",
+      dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "L3MON4D3/LuaSnip",
+        "neovim/nvim-lspconfig",
+      },
+      config = function()
+        local cmp = require("cmp")
+        cmp.setup({
+          snippet = {
+            -- REQUIRED - you must specify a snippet engine
+            expand = function(args)
+              require("luasnip").lsp_expand(args.body)
+            end,
+          },
+          window = {
+            completion = cmp.config.window.bordered(),
+            documentation = cmp.config.window.bordered(),
+          },
+          mapping = cmp.mapping.preset.insert({
+            ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-e>"] = cmp.mapping.abort(),
+            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          }),
+          sources = cmp.config.sources({
+            { name = "nvim_lsp" },
+            { name = "luasnip" },
+          }, {
+            { name = "buffer" },
+          }),
+        })
 
-				cmp.setup.cmdline(":", {
-					mapping = cmp.mapping.preset.cmdline(),
-					sources = cmp.config.sources({
-						{ name = "path" },
-					}, {
-						{ name = "cmdline" },
-					}),
-					matching = { disallow_symbol_nonprefix_matching = false },
-				})
+        cmp.setup.cmdline(":", {
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = cmp.config.sources({
+            { name = "path" },
+          }, {
+            { name = "cmdline" },
+          }),
+          matching = { disallow_symbol_nonprefix_matching = false },
+        })
 
-				local function lsp_config(lsp, settings)
-					local capabilities = require("cmp_nvim_lsp").default_capabilities()
-					vim.lsp.config(lsp, {
-						capabilities = capabilities,
-						settings = settings,
-					})
-					vim.lsp.enable(lsp)
-				end
+        local function lsp_config(lsp, settings)
+          local capabilities = require("cmp_nvim_lsp").default_capabilities()
+          vim.lsp.config(lsp, {
+            capabilities = capabilities,
+            settings = settings,
+          })
+          vim.lsp.enable(lsp)
+        end
 
-				lsp_config("lua_ls", {
-					Lua = {
-						diagnostics = {
-							globals = {
-								"vim",
-							},
-						},
-						telemetry = {
-							enable = false,
-						},
-					},
-				})
-				lsp_config("pyright", {})
-				lsp_config("rust_analyzer", {})
+        lsp_config("lua_ls", {
+          Lua = {
+            diagnostics = {
+              globals = {
+                "vim",
+              },
+            },
+            telemetry = {
+              enable = false,
+            },
+          },
+        })
+        lsp_config("pyright", {})
+        lsp_config("rust_analyzer", {})
+        lsp_config("gopls", {})
 
-				vim.api.nvim_create_autocmd("BufEnter", {
-					pattern = "*.rs",
-					callback = function()
-						local root = vim.fs.find("Cargo.toml", {
-							upward = true,
-							path = vim.api.nvim_buf_get_name(0),
-						})[1]
+        vim.api.nvim_create_autocmd('LspAttach', {
+          desc = 'LSP actions',
+          callback = function(event)
+            vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', { buffer = event.buf })
+            vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', { buffer = event.buf })
+          end
+        })
 
-						if not root then
-							vim.notify(
-								"Rust file opened outside a Cargo workspace\nrust-analyzer completion will not work",
-								vim.log.levels.WARN
-							)
-						end
-					end,
-				})
-			end,
-		},
-		{
-			"stevearc/conform.nvim",
-			config = function()
-				require("conform").setup({
-					stop_after_first = true,
-					notify_no_formatters = false,
-					default_format_opts = {
-						lsp_format = "fallback",
-					},
-					formatters_by_ft = {
-						lua = { "stylua" },
-					},
-				})
+        vim.api.nvim_create_autocmd("BufEnter", {
+          pattern = "*.rs",
+          callback = function()
+            local root = vim.fs.find("Cargo.toml", {
+              upward = true,
+              path = vim.api.nvim_buf_get_name(0),
+            })[1]
 
-				vim.keymap.set("n", "<leader>=", function()
-					local did_format = require("conform").format({
-						lsp_format = "fallback",
-					})
-					if did_format then
-						return
-					end
+            if not root then
+              vim.notify(
+                "Rust file opened outside a Cargo workspace\nrust-analyzer completion will not work",
+                vim.log.levels.WARN
+              )
+            end
+          end,
+        })
+      end,
+    },
+    {
+      "stevearc/conform.nvim",
+      config = function()
+        require("conform").setup({
+          stop_after_first = true,
+          notify_no_formatters = false,
+          default_format_opts = {
+            lsp_format = "fallback",
+          },
+          formatters_by_ft = {
+            lua = { "stylua" },
+          },
+        })
 
-					local view = vim.fn.winsaveview()
-					vim.cmd("normal! gg=G")
-					vim.fn.winrestview(view)
-				end, { desc = "Smart formatting using Conform" })
-			end,
-		},
-		{
-			"EdenEast/nightfox.nvim",
-			config = function()
-				vim.cmd("colorscheme carbonfox")
-			end,
-		},
-		{ "tpope/vim-fugitive" },
-		{ "lewis6991/gitsigns.nvim" },
-		{
-			"nvim-lualine/lualine.nvim",
-			dependencies = { "nvim-tree/nvim-web-devicons" },
+        vim.keymap.set("n", "<leader>=", function()
+          local did_format = require("conform").format({
+            lsp_format = "fallback",
+          })
+          if did_format then
+            return
+          end
+
+          local view = vim.fn.winsaveview()
+          vim.cmd("normal! gg=G")
+          vim.fn.winrestview(view)
+        end, { desc = "Smart formatting using Conform" })
+      end
+    },
+    {
+      "EdenEast/nightfox.nvim",
+      config = function()
+        vim.cmd("colorscheme carbonfox")
+      end,
+    },
+    { "tpope/vim-fugitive" },
+    { "lewis6991/gitsigns.nvim" },
+    {
+      "nvim-lualine/lualine.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
         require('lualine').setup()
       end,
-		},
-		{ "neovim/nvim-lspconfig" },
-		{
-			"stevearc/oil.nvim",
-			config = function()
-				require("oil").setup({
-					view_options = {
-						show_hidden = true,
-					},
-				})
-				vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-			end,
-		},
-		{
-			"benomahony/oil-git.nvim",
-			dependencies = { "stevearc/oil.nvim" },
-		},
-		{
-			"MeanderingProgrammer/render-markdown.nvim",
-			dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-		},
-		{
-			"kylechui/nvim-surround",
-			version = "^3.0.0",
-			event = "VeryLazy",
-		},
-		{
-			"nvim-telescope/telescope.nvim",
-			version = "*",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-				config = function()
-					require("telescope").setup()
-					local builtin = require("telescope.builtin")
-					vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-					vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
-					vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
-					vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
-				end,
-			},
-		},
-		{
-			"rachartier/tiny-inline-diagnostic.nvim",
-			event = "VeryLazy",
-			priority = 1000,
-			config = function()
-				require("tiny-inline-diagnostic").setup()
-				vim.diagnostic.config({ virtual_text = false }) -- Disable Neovim's default virtual text diagnostics
-			end,
-		},
-		{
-			"jiaoshijie/undotree",
-			keys = { -- load the plugin only when using it's keybinding:
-				{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
-			},
-		},
-	},
-	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "carbonfox" } },
-	-- automatically check for plugin updates
-	checker = { enabled = true },
+    },
+    { "neovim/nvim-lspconfig" },
+    {
+      "stevearc/oil.nvim",
+      config = function()
+        require("oil").setup({
+          view_options = {
+            show_hidden = true,
+          },
+        })
+        vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+      end,
+    },
+    {
+      "benomahony/oil-git.nvim",
+      dependencies = { "stevearc/oil.nvim" },
+    },
+    {
+      "MeanderingProgrammer/render-markdown.nvim",
+      dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    },
+    {
+      "kylechui/nvim-surround",
+      version = "^3.0.0",
+      event = "VeryLazy",
+    },
+    {
+      "nvim-telescope/telescope.nvim",
+      version = "*",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        config = function()
+          require("telescope").setup()
+          local builtin = require("telescope.builtin")
+          vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+          vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
+          vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+          vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
+        end,
+      },
+    },
+    {
+      "rachartier/tiny-inline-diagnostic.nvim",
+      event = "VeryLazy",
+      priority = 1000,
+      config = function()
+        require("tiny-inline-diagnostic").setup()
+        vim.diagnostic.config({ virtual_text = false }) -- Disable Neovim's default virtual text diagnostics
+      end,
+    },
+    {
+      "jiaoshijie/undotree",
+      keys = { -- load the plugin only when using it's keybinding:
+        { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+      },
+    },
+  },
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "carbonfox" } },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
 })
