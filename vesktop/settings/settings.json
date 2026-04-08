@@ -407,7 +407,37 @@
         "PinDMs": {
             "enabled": true,
             "userBasedCategoryList": {
-                "826766759242629160": []
+                "826766759242629160": [
+                    {
+                        "id": "unt8dnq8ud",
+                        "name": "IRL People",
+                        "color": 3447003,
+                        "collapsed": false,
+                        "channels": [
+                            "1151047904618889236",
+                            "1195843536285880380",
+                            "1304507403940925511",
+                            "1282047580070477886",
+                            "974372283567181854",
+                            "1373215129596072039"
+                        ]
+                    },
+                    {
+                        "id": "k5lz7ps7cn",
+                        "name": "Internet People",
+                        "color": 11342935,
+                        "collapsed": false,
+                        "channels": [
+                            "1312045698606170142",
+                            "1483472301105217680",
+                            "1489278887887372431",
+                            "1487832644061233173",
+                            "1388599696745824380",
+                            "1392140078184140880",
+                            "1487847107548418099"
+                        ]
+                    }
+                ]
             },
             "canCollapseDmSection": false,
             "pinOrder": 0
@@ -572,7 +602,9 @@
             "service": "google",
             "deeplApiKey": "",
             "autoTranslate": false,
-            "showAutoTranslateTooltip": true
+            "showAutoTranslateTooltip": true,
+            "receivedInput": "auto",
+            "receivedOutput": "en"
         },
         "TypingIndicator": {
             "enabled": true,
@@ -688,6 +720,9 @@
             "enabled": true,
             "tagsList": {},
             "clyde": true
+        },
+        "NoDefaultHangStatus": {
+            "enabled": false
         }
     },
     "uiElements": {
@@ -704,6 +739,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1774366980314
+        "settingsSyncVersion": 1775660571019
     }
 }
