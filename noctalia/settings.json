@@ -156,6 +156,15 @@
                     "textColor": "none",
                     "useFixedWidth": false,
                     "visualizerType": "linear"
+                },
+                {
+                    "deviceNativePath": "__default__",
+                    "displayMode": "graphic",
+                    "hideIfIdle": false,
+                    "hideIfNotDetected": true,
+                    "id": "Battery",
+                    "showNoctaliaPerformance": false,
+                    "showPowerProfiles": false
                 }
             ],
             "right": [
@@ -192,13 +201,7 @@
                     "enableColorization": false,
                     "icon": "noctalia",
                     "id": "ControlCenter",
-                    "useDistroLogo": false
-                },
-                {
-                    "id": "plugin:arch-updater"
-                },
-                {
-                    "id": "plugin:screenshot"
+                    "useDistroLogo": true
                 }
             ]
         }
@@ -388,14 +391,14 @@
     "hooks": {
         "colorGeneration": "",
         "darkModeChange": "",
-        "enabled": false,
+        "enabled": true,
         "performanceModeDisabled": "",
         "performanceModeEnabled": "",
         "screenLock": "",
         "screenUnlock": "",
         "session": "",
         "startup": "",
-        "wallpaperChange": ""
+        "wallpaperChange": "cp /home/prohaker/Pictures/Wallpapers/xenia.png /usr/share/sddm/themes/noctalia/Assets/background.png\n"
     },
     "idle": {
         "customCommands": "[]",
@@ -413,11 +416,11 @@
     },
     "location": {
         "analogClockInCalendar": false,
-        "autoLocate": false,
+        "autoLocate": true,
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "",
+        "name": "Warsaw",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,
@@ -504,7 +507,7 @@
         "countdownDuration": 3000,
         "enableCountdown": true,
         "largeButtonsLayout": "single-row",
-        "largeButtonsStyle": true,
+        "largeButtonsStyle": false,
         "position": "center",
         "powerOptions": [
             {
@@ -594,7 +597,7 @@
     "templates": {
         "activeTemplates": [
         ],
-        "enableUserTheming": false
+        "enableUserTheming": true
     },
     "ui": {
         "boxBorderEnabled": true,
