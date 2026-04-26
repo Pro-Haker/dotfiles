@@ -434,7 +434,8 @@
                             "1487832644061233173",
                             "1388599696745824380",
                             "1392140078184140880",
-                            "1487847107548418099"
+                            "1487847107548418099",
+                            "1497205606472355980"
                         ]
                     }
                 ]
@@ -723,6 +724,9 @@
         },
         "NoDefaultHangStatus": {
             "enabled": false
+        },
+        "CharacterCounter": {
+            "enabled": false
         }
     },
     "uiElements": {
@@ -739,6 +743,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1775660571019
+        "settingsSyncVersion": 1777032990845
     }
 }
