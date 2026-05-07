@@ -18,6 +18,8 @@
         "ignoreMouseInput": false,
         "overviewLayer": true,
         "pinnedApps": [
+            "vesktop",
+            "zen"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
