@@ -19,7 +19,10 @@
         "overviewLayer": true,
         "pinnedApps": [
             "vesktop",
-            "zen"
+            "zen",
+            "spotify-launcher",
+            "steam",
+            "org.prismlauncher.PrismLauncher"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
