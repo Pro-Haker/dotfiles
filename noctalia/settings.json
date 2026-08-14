@@ -21,8 +21,7 @@
             "vesktop",
             "firefox",
             "spotify-launcher",
-            "steam",
-            "vesktop"
+            "steam"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -108,6 +107,7 @@
             "left": [
                 {
                     "colorizeSystemIcon": "none",
+                    "colorizeSystemText": "none",
                     "customIconPath": "",
                     "enableColorization": false,
                     "icon": "rocket",
@@ -202,6 +202,7 @@
                 {
                     "colorizeDistroLogo": false,
                     "colorizeSystemIcon": "none",
+                    "colorizeSystemText": "none",
                     "customIconPath": "",
                     "enableColorization": false,
                     "icon": "noctalia",
