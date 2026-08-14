@@ -19,10 +19,10 @@
         "overviewLayer": true,
         "pinnedApps": [
             "vesktop",
-            "zen",
+            "firefox",
             "spotify-launcher",
             "steam",
-            "org.prismlauncher.PrismLauncher"
+            "vesktop"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -147,6 +147,15 @@
                     "usePadding": false
                 },
                 {
+                    "deviceNativePath": "__default__",
+                    "displayMode": "graphic",
+                    "hideIfIdle": false,
+                    "hideIfNotDetected": true,
+                    "id": "Battery",
+                    "showNoctaliaPerformance": false,
+                    "showPowerProfiles": false
+                },
+                {
                     "compactMode": false,
                     "hideMode": "hidden",
                     "hideWhenIdle": false,
@@ -161,15 +170,6 @@
                     "textColor": "none",
                     "useFixedWidth": false,
                     "visualizerType": "linear"
-                },
-                {
-                    "deviceNativePath": "__default__",
-                    "displayMode": "graphic",
-                    "hideIfIdle": false,
-                    "hideIfNotDetected": true,
-                    "id": "Battery",
-                    "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false
                 }
             ],
             "right": [

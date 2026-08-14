@@ -4,10 +4,6 @@
 !/fish/
 !/nvim/
 !/tmux/
-!/hyfetch.json
-/vesktop/*
-vesktop/settings.json
-vesktop/settings/settings.json
 !/git/
 !/hypr/
 !/noctalia/
