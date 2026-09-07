@@ -130,10 +130,7 @@ hl.config({
         gaps_in = 5,
         gaps_out = 20,
         border_size = 2,
-        -- https://wiki.hypr.land/Configuring/Variables/#variable-types for info about colors
-        -- Set to true enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = false,
-        -- Please see https://wiki.hypr.land/Configuring/Tearing/ before you turn this on
         allow_tearing = false,
         layout = "dwindle",
         col = {
@@ -179,50 +176,6 @@ hl.config({
         --           NAME,          ONOFF, SPEED, CURVE,        [STYLE]
     },
 })
-
--- Ref https://wiki.hypr.land/Configuring/Workspace-Rules/
-
--- "Smart gaps" / "No gaps when only"
-
--- uncomment all if you wish to use that.
-
--- workspace = w[tv1], gapsout:0, gapsin:0
-
--- workspace = f[1], gapsout:0, gapsin:0
-
--- windowrule {
-
---     name = no-gaps-wtv1
-
---     match:float = false
-
---     match:workspace = w[tv1]
-
---
-
---     border_size = 0
-
---     rounding = 0
-
--- }
-
---
-
--- windowrule {
-
---     name = no-gaps-f1
-
---     match:float = false
-
---     match:workspace = f[1]
-
---
-
---     border_size = 0
-
---     rounding = 0
-
--- }
 
 -- See https://wiki.hypr.land/Configuring/Master-Layout/ for more
 
@@ -288,11 +241,7 @@ local ipc = "qs -c noctalia-shell ipc call"
 
 -- Core binds
 
-hl.bind("SUPER" .. " + " .. "SPACE", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call launcher toggle"))
-
-hl.bind("SUPER" .. " + " .. "S", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call controlCenter toggle"))
-
-hl.bind("SUPER" .. " + " .. "comma", hl.dsp.exec_cmd("qs -c noctalia-shell ipc call settings toggle"))
+hl.bind("SUPER" .. " + " .. "SPACE", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
 
 hl.bind("Print", hl.dsp.exec_cmd("flameshot gui"))
 
